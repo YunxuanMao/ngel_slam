@@ -1,0 +1,101 @@
+sync_method: strict
+scale: 1
+verbose: true
+vis: true
+device: "cuda:3"
+
+# init
+num_init_frame: 1
+init_method: uniform # random
+dilate: 1
+init_e: 5
+init_iter: 0
+
+# label
+use_label: true
+label: 2 # chair
+
+ray:
+  pc_radius: 25
+  min_z: -3
+  max_z: 30
+  depth_min: 2.75 #2.75
+
+mapping:
+  mapping_time: 5
+  every_frame: 1
+  ray_sample: 10000
+  forget: true
+  # lr
+  grid_lr: 0.01 # 0.01 0.02
+  s_lr: 1
+  mlp_lr: 0.0003 #0.01 0.001 0.0003
+  occ_mlp_lr: 0.003
+  lr_decay: 0.9
+  # batch
+  ray_chunk: 1000
+  test_chunk: 50000
+
+  smooth_length: 0.02
+  lamudas:
+    rgb: 1.
+    depth: 10.
+    depth_occ: 1.
+    eik: 1. #0.01
+    smooth: 1. #2
+    sdf_near: 10.
+    sdf_far: 1. #1 
+    normal: 0 #20
+    semantic: 0
+
+tracking:
+  uncertainty: 5
+
+models:
+  s_dim: 120
+  margin: 0.1
+  use_occ: true
+  use_color: true
+  color_dim: 6
+  octree:
+    feature_dim: 6
+    base_lod: 7
+    num_lods: 3
+    interpolation_type: 'linear'
+    multiscale_type: 'sum'
+    feature_std: 0.
+    feature_bias: 0.
+    polynomial_interpolation: true # if false, linear interpolate
+  decoder:
+    W: 32 #32 # 128 #128
+    D: 2 #2 #1
+    skips: []
+    n_freq: 0
+    weight_norm: false
+    concat_qp: false
+  occ_decoder:
+    W: 32 #32 # 128 #128
+    D: 2 #2 #1
+    skips: []
+    n_freq: 0
+    weight_norm: false
+    concat_qp: false
+  rgb_decoder:
+    W: 32
+    D: 2
+    skips: []
+    use_view_dirs: true # concatenate viewing direction
+    use_normals: false # concatenate surface normal
+    use_dot_prod: false # concatenate dot product between viewing dir and surface normal
+    n_freq: -1
+    weight_norm: false
+    concat_qp: false
+
+raymarch:
+  sample_lods: [0]
+  num_samples_list: [50] #[10] # 4 [4,4,6] #[2 2 8] [2,2,2,3] #[4,8,6,4,2]
+  num_samples_sur: 9 #5
+  n_important: 4 #20 #8
+  up_sample_steps: 2 #4
+  num_sample_test: 50
+  

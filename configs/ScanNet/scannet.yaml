@@ -1,0 +1,28 @@
+dataset: 'scannet'
+map_length: 20000
+overlap_threshold: 3
+dilate: 0
+mapping:
+  smooth_length: 0.0001
+  smooth: false
+  vis_freq: 50000
+  mesh_freq: 2000
+  ckpt_freq: 100
+  keyframe_num: 4
+  ray_sample: 10000
+  iters: 3
+  init_iters: 1000
+cam: 
+  H: 480 
+  W: 640
+  fx: 577.590698
+  fy: 578.729797
+  cx: 318.905426
+  cy: 242.683609
+  png_depth_scale: 1000. #for depth image in png format
+  crop_edge: 10
+
+keyframes:
+  option: 'filter_depth'
+  num_rays_to_save: 10000
+  depth_trunc: 3

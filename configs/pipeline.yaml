@@ -1,0 +1,120 @@
+verbose: true
+device: "cuda:1"
+device_global: "cuda:1"
+
+pos_embed: false
+map_length: 200
+overlap_threshold: 15
+freq: 5
+# init
+dilate: 0
+mapping:
+  # train
+  iters: 3
+  init_iters: 500
+  # keyframe
+  ray_sample_keyframe_select: 1000
+  keyframe_num: 6
+  
+  frustum_feature_selection: false
+  # raymarch
+  samples_per_vox: 10
+  samples_per_vox_test: 10
+  # lr
+  grid_lr: [0.03, 0.03, 0.03, 0.01,0.01, 0.01, 0.01, 0.01, 0.01]
+  occ_lr: 0.01
+  rgb_lr: 0.001
+  lr_decay: 0.
+  # batch
+  ray_sample: 5000 
+  test_chunk: 50000
+  smooth_length: 0.001
+  smooth: false
+  # lamudas for training
+  lamudas:
+    rgb: 1.
+    depth_occ: 1.
+    smooth: 0.
+    unc: 0.
+  # save freq
+  vis_freq: 50
+  mesh_freq: 50
+  ckpt_freq: 500
+    
+keyframes:
+  option: 'random'
+  num_rays_to_save: 10000
+  depth_trunc: 10
+
+models:
+  occ_dim: 2
+  color_start: 2
+  color_dim: 12
+  octree:
+    feature_dim: [2,14]
+    base_lod: 6
+    num_lods: 2
+    interpolation_type: 'linear'
+    multiscale_type: 'sum'
+    feature_std: 0.0001
+    feature_bias: -0.0001
+  occ_decoder:
+    W: 16
+    D: 1
+    skips: []
+    n_freq: 0
+    weight_norm: false
+    concat_qp: false
+  rgb_decoder:
+    W: 32
+    D: 3
+    skips: []
+    use_view_dirs: false # concatenate viewing direction
+    use_normals: false # concatenate surface normal
+    use_dot_prod: false # concatenate dot product between viewing dir and surface normal
+    n_freq: -1
+    weight_norm: false
+    concat_qp: false
+
+models_global:
+  occ_dim: 2
+  color_start: 2
+  color_dim: 12
+  octree:
+    feature_dim: [2,14]
+    base_lod: 7
+    num_lods: 2
+    interpolation_type: 'linear'
+    multiscale_type: 'sum'
+    feature_std: 0.0001
+    feature_bias: -0.0001
+  occ_decoder:
+    W: 16
+    D: 1
+    skips: []
+    n_freq: 0
+    weight_norm: false
+    concat_qp: false
+  rgb_decoder:
+    W: 32
+    D: 3
+    skips: []
+    use_view_dirs: false # concatenate viewing direction
+    use_normals: false # concatenate surface normal
+    use_dot_prod: false # concatenate dot product between viewing dir and surface normal
+    n_freq: -1
+    weight_norm: false
+    concat_qp: false
+
+global_mapper:
+  iters_out: 1000
+  iters_in: 300
+
+embedder:
+  freq: 10
+
+meshing:
+  reso: 512
+  clean: False
+
+  

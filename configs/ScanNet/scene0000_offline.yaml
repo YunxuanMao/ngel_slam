@@ -1,0 +1,17 @@
+inherit_from: configs/ScanNet/scannet.yaml
+# label
+use_label: true
+label: 7 # desk
+
+# origin: [2.3, 1.1, 0.7]
+# scale: 3
+
+origin: [4.5, 4.75, 1.75]
+scale: 7
+
+mapping:
+  bound: [[-2.0,11.0],[-2.0,11.5],[-2.0,5.5]]
+  marching_cubes_bound: [[-2.0,11.0],[-2.0,11.5],[-2.0,5.5]]
+data:
+  input_folder: Datasets/scannet/scans/scene0000_00
+  output: output/scannet/scans/scene0000_00_offline

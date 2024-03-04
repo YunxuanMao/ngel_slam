@@ -1,0 +1,36 @@
+dataset: 'replica'
+dilate: 1
+multi_volume: False
+map_length: 20000
+overlap_threshold: 10
+mapping:
+  smooth_length: 0.0005
+  smooth: false
+  vis_freq: 5000
+  mesh_freq: 5000
+  ckpt_freq: 50
+  keyframe_num: 4
+  ray_sample: 5000
+  iters: 3
+  init_iters: 10000
+models:
+  occ_dim: 2
+  color_start: 2
+  color_dim: 18
+  octree:
+    feature_dim: [2, 20]
+    base_lod: 7
+    num_lods: 2
+    interpolation_type: 'linear'
+    multiscale_type: 'sum'
+    feature_std: 0.0001
+    feature_bias: -0.0001
+cam:
+  H: 680
+  W: 1200
+  fx: 600.0
+  fy: 600.0
+  cx: 599.5
+  cy: 339.5
+  png_depth_scale: 6553.5 #for depth image in png format
+  crop_edge: 0
