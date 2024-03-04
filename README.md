@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="">
-    <img src="./media/teaser.png" alt="Logo" width="80%">
+    <img src="./media/teaser.png" alt="Logo" width="60%">
   </a>
 </p>
 
@@ -60,6 +60,8 @@ You should first start the ORB-SLAM3-ROS, and then using code below
 python main.py --config '{PATH_TO_CONFIG}'  --input_folder '{PATH_TO_INPUT_FOLDER}' --output '{PATH_TO_OUTPUT}' 
 ```
 
+
+
 ## Citation
 
 If you find our code or paper useful for your research, please consider citing:
@@ -72,3 +74,5 @@ If you find our code or paper useful for your research, please consider citing:
   year={2023}
 }
 ```
+
+For large scale mapping work, you can refer to [NF-Atlas](https://github.com/yuxuan1206/NF-Atlas).
