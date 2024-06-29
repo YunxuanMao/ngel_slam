@@ -1,0 +1,3 @@
+[submodule "orb_slam3_ros"]
+	path = orb_slam3_ros
+	url = https://github.com/thien94/orb_slam3_ros.git
