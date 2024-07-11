@@ -4,7 +4,7 @@
 
 > NGEL-SLAM: Neural Implicit Representation-based Global Consistent Low-Latency SLAM System <br />
 > Yunxuan Mao, Xuan Yu, Kai Wang, Yue Wang, Rong Xiong, Yiyi Liao<br />
-> ICRA 2024
+> Winner of ICRA 2024 Best Paper Award in Robot Vision
 
 <p align="center">
   <a href="">
