@@ -24,7 +24,8 @@ git clone https://github.com/YunxuanMao/ngel_slam.git
 cd ..
 catkin_make
 ```
-See [orb-slam3-ros](https://github.com/thien94/orb_slam3_ros) for more detail.
+<!-- See [orb-slam3-ros](https://github.com/thien94/orb_slam3_ros) for more detail. -->
+ORB-SLAM-ROS3 modified by me can be downloaded here: https://drive.google.com/drive/folders/1RvMYtInNbKuP8XBV2_Z4iEpCbDixKxLE?usp=drive_link
 
 ### Install the environment
 
@@ -40,7 +41,8 @@ cd yx_kaolin
 python setup.py develop
 ```
 
-What's more, [kaolin-wisp](https://kaolin-wisp.readthedocs.io/en/latest/pages/install.html) should be installed.
+<!-- What's more, [kaolin-wisp](https://kaolin-wisp.readthedocs.io/en/latest/pages/install.html) should be installed. -->
+kaolin-wisp modified by me can be downloaded here: https://drive.google.com/drive/folders/1RvMYtInNbKuP8XBV2_Z4iEpCbDixKxLE?usp=drive_link
 
 
 ## Data Preparation
@@ -76,3 +78,6 @@ If you find our code or paper useful for your research, please consider citing:
 ```
 
 For large scale mapping work, you can refer to [NF-Atlas](https://github.com/yuxuan1206/NF-Atlas).
+
+## Acknowledge
+Thanks for the source code of [orb-slam3-ros](https://github.com/thien94/orb_slam3_ros) and [kaolin-wisp](https://kaolin-wisp.readthedocs.io/en/latest/pages/install.html).
