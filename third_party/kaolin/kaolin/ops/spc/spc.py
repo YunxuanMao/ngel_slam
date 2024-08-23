@@ -463,3 +463,42 @@ def unbatched_make_trinkets(point_hierarchy, pyramid, point_hierarchy_dual, pyra
     trinkets = torch.tensor(trinkets, device=device, dtype=torch.int).reshape(-1, 8)
     parents = torch.cat(parents, dim=0)
     return trinkets, parents
+
+
+def unbatched_make_parents(point_hierarchy, pyramid):
+    
+    device = point_hierarchy.device
+    parents = []
+
+    # At a high level... the goal of this algorithm is to create a table which maps from the primary
+    # octree of voxels to the dual octree of corners, while also keeping track of parents. 
+    # It does so by constructing a lookup table which maps morton codes of the source octree corners
+    # to the index of the destination (dual), then using pandas to do table lookups. It's a silly
+    # solution that would be much faster with a GPU but works well enough.
+    for lvl in range(pyramid.shape[1] - 1):
+        # The source (primary octree) is sorted in morton order by construction
+        points = unbatched_get_level_points(point_hierarchy, pyramid, lvl)
+
+        if lvl == 0:
+            parents.append(torch.tensor([-1] * pyramid[0, 0], device='cuda', dtype=torch.int).to(device))
+        else:
+            # Dividing by 2 will yield the morton code of the parent
+            pc = torch.floor(points / 2.0).short()
+            # Morton of the parents (point_hierarchy_index -> parent_morton)
+            mt_pc_parent = points_to_morton(pc)
+
+            points_parents = unbatched_get_level_points(point_hierarchy, pyramid, lvl - 1)
+
+            # point_hierarchy_index (i-1) -> parent_morton
+            mt_parents = points_to_morton(points_parents)
+
+            # parent_morton -> point_hierarchy_index
+            plut = {k: i for i, k in enumerate(mt_parents.cpu().numpy())}
+            pc_idx = [plut[i] for i in mt_pc_parent.cpu().numpy()]
+            parents.append(torch.tensor(pc_idx, device=device, dtype=torch.int) +
+                           pyramid[1, lvl - 1])
+
+
+    # Trinkets are relative to the beginning of each pyramid base
+    parents = torch.cat(parents, dim=0)
+    return parents
